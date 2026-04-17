@@ -134,16 +134,11 @@ function LibraryContent() {
                   (e.currentTarget as HTMLElement).style.background = "#0a0a0a";
                 }}
               >
-                {/* Category + Pro badge */}
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
+                {/* Category */}
+                <div style={{ marginBottom: "16px" }}>
                   <span className="font-serif" style={{ fontSize: "10px", letterSpacing: "0.15em", color: "#ff4d00", textTransform: "uppercase" }}>
                     {t.category}
                   </span>
-                  {t.isPro && (
-                    <span className="font-serif" style={{ fontSize: "9px", letterSpacing: "0.12em", color: "#0a0a0a", background: "#ff4d00", padding: "3px 8px" }}>
-                      PRO
-                    </span>
-                  )}
                 </div>
 
                 {/* Title */}

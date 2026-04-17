@@ -42,15 +42,6 @@ export default function TechniqueClient({ technique: t, related }: Props) {
         animate={{ opacity: 1, y: 0 }}
         style={{ maxWidth: "900px", margin: "0 auto", padding: "40px 24px 48px", borderBottom: "1px solid #1a1a1a" }}
       >
-        {/* Pro badge */}
-        {t.isPro && (
-          <div style={{ marginBottom: "16px" }}>
-            <span className="font-serif" style={{ fontSize: "10px", color: "#0a0a0a", background: "#ff4d00", padding: "4px 10px", letterSpacing: "0.1em" }}>
-              PRO ONLY
-            </span>
-          </div>
-        )}
-
         <h1 className="font-serif" style={{ fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 700, marginBottom: "24px", lineHeight: "1.1" }}>
           {t.title}
         </h1>
@@ -160,47 +151,6 @@ export default function TechniqueClient({ technique: t, related }: Props) {
             </div>
           </motion.div>
         )}
-
-        {/* Ask AI */}
-        <div
-          style={{
-            background: "#0d0d0d",
-            border: "1px solid #1a1a1a",
-            padding: "32px",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            flexWrap: "wrap",
-            gap: "16px",
-            marginBottom: "56px",
-          }}
-        >
-          <div>
-            <h3 className="font-serif" style={{ fontSize: "16px", fontWeight: 700, marginBottom: "6px" }}>
-              Questions about this technique?
-            </h3>
-            <p style={{ fontSize: "13px", color: "#555" }}>Ask the AI assistant for custom advice. Pro only.</p>
-          </div>
-          <Link
-            href="/assistant"
-            style={{
-              fontFamily: "var(--font-sans), sans-serif",
-              fontSize: "11px",
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              color: "#0a0a0a",
-              background: "#ff4d00",
-              padding: "12px 20px",
-              textDecoration: "none",
-              transition: "opacity 0.2s",
-              whiteSpace: "nowrap",
-            }}
-            onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.opacity = "0.85")}
-            onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.opacity = "1")}
-          >
-            Ask AI about this →
-          </Link>
-        </div>
 
         {/* Related */}
         {related.length > 0 && (

@@ -36,11 +36,70 @@ const categories = [
 const steps = [
   { n: "01", title: "Browse", desc: "Elige técnica por subgénero techno" },
   { n: "02", title: "Learn", desc: "Parámetros exactos de Ableton, valores numéricos" },
-  { n: "03", title: "Ask AI", desc: "Describe tu problema, recibe solución Pro" },
+  { n: "03", title: "Apply", desc: "Aplica en tu DAW y ajusta a tu sonido" },
 ];
 
-export default function LandingPage() {
+/* ─── Vinyl record SVG ─────────────────────────────────── */
+function VinylRecord({ size }: { size: number }) {
+  const cx = size / 2;
+  const r = size / 2;
+  const grooves = [0.92, 0.86, 0.80, 0.74, 0.68, 0.62, 0.56, 0.50, 0.44, 0.38];
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} fill="none">
+      {/* Outer rim */}
+      <circle cx={cx} cy={cx} r={r - 1} stroke="white" strokeWidth="2" />
+      {/* Groove rings */}
+      {grooves.map((frac, i) => (
+        <circle
+          key={i}
+          cx={cx}
+          cy={cx}
+          r={r * frac}
+          stroke="white"
+          strokeWidth={i === 0 ? "1" : "0.4"}
+          opacity={i === 0 ? "0.5" : "0.3"}
+        />
+      ))}
+      {/* Label circle */}
+      <circle cx={cx} cy={cx} r={r * 0.26} stroke="white" strokeWidth="1.5" opacity="0.6" />
+      <circle cx={cx} cy={cx} r={r * 0.25} fill="rgba(255,255,255,0.04)" />
+      {/* Spindle hole */}
+      <circle cx={cx} cy={cx} r={r * 0.025} fill="rgba(255,255,255,0.7)" />
+    </svg>
+  );
+}
 
+/* tilt: static 3D perspective wrapper · spin: rotation child */
+function Vinyl({
+  size,
+  tiltX,
+  tiltY,
+  duration,
+  style,
+}: {
+  size: number;
+  tiltX: number;
+  tiltY: number;
+  duration: number;
+  style?: React.CSSProperties;
+}) {
+  return (
+    <div
+      style={{
+        position: "absolute",
+        pointerEvents: "none",
+        transform: `perspective(900px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`,
+        ...style,
+      }}
+    >
+      <div style={{ animation: `vinyl-spin ${duration}s linear infinite` }}>
+        <VinylRecord size={size} />
+      </div>
+    </div>
+  );
+}
+
+export default function LandingPage() {
   return (
     <div style={{ background: "#0a0a0a", color: "#ffffff" }}>
       {/* ── HERO ── */}
@@ -57,6 +116,7 @@ export default function LandingPage() {
           overflow: "hidden",
         }}
       >
+        {/* Radial glow */}
         <div
           style={{
             position: "absolute",
@@ -70,11 +130,53 @@ export default function LandingPage() {
           }}
         />
 
+        {/* ── 3D Vinyl records ── */}
+        {/* Top-left — large, heavy tilt, slow */}
+        <Vinyl
+          size={520}
+          tiltX={62}
+          tiltY={-18}
+          duration={38}
+          style={{ top: "-80px", left: "-140px", opacity: 0.08 }}
+        />
+        {/* Top-right — medium, different angle */}
+        <Vinyl
+          size={380}
+          tiltX={58}
+          tiltY={22}
+          duration={52}
+          style={{ top: "30px", right: "-100px", opacity: 0.07 }}
+        />
+        {/* Bottom-left — medium-large */}
+        <Vinyl
+          size={440}
+          tiltX={68}
+          tiltY={-8}
+          duration={44}
+          style={{ bottom: "-60px", left: "-60px", opacity: 0.07 }}
+        />
+        {/* Bottom-right — small accent */}
+        <Vinyl
+          size={280}
+          tiltX={55}
+          tiltY={30}
+          duration={30}
+          style={{ bottom: "40px", right: "-30px", opacity: 0.09 }}
+        />
+        {/* Center-left — ghost vinyl, very subtle */}
+        <Vinyl
+          size={600}
+          tiltX={72}
+          tiltY={5}
+          duration={60}
+          style={{ top: "50%", left: "-200px", transform: "translateY(-50%)", opacity: 0.04 }}
+        />
+
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          style={{ textAlign: "center", position: "relative" }}
+          style={{ textAlign: "center", position: "relative", zIndex: 1 }}
         >
           <h1
             className="font-serif"
@@ -101,49 +203,29 @@ export default function LandingPage() {
             Production techniques for electronic music.
           </p>
 
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "16px" }}>
-            <Link
-              href="/library"
-              style={{
-                fontFamily: "var(--font-sans), sans-serif",
-                fontSize: "13px",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                color: "#0a0a0a",
-                background: "#ff4d00",
-                padding: "14px 40px",
-                textDecoration: "none",
-                transition: "opacity 0.2s",
-                display: "inline-block",
-              }}
-              onMouseEnter={(e) =>
-                ((e.currentTarget as HTMLElement).style.opacity = "0.85")
-              }
-              onMouseLeave={(e) =>
-                ((e.currentTarget as HTMLElement).style.opacity = "1")
-              }
-            >
-              Browse Techniques →
-            </Link>
-            <Link
-              href="/assistant"
-              style={{
-                fontSize: "12px",
-                color: "#444",
-                textDecoration: "none",
-                letterSpacing: "0.05em",
-                transition: "color 0.2s",
-              }}
-              onMouseEnter={(e) =>
-                ((e.currentTarget as HTMLElement).style.color = "#ff4d00")
-              }
-              onMouseLeave={(e) =>
-                ((e.currentTarget as HTMLElement).style.color = "#444")
-              }
-            >
-              or ask AI →
-            </Link>
-          </div>
+          <Link
+            href="/library"
+            style={{
+              fontFamily: "var(--font-sans), sans-serif",
+              fontSize: "13px",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              color: "#0a0a0a",
+              background: "#ff4d00",
+              padding: "14px 40px",
+              textDecoration: "none",
+              transition: "opacity 0.2s",
+              display: "inline-block",
+            }}
+            onMouseEnter={(e) =>
+              ((e.currentTarget as HTMLElement).style.opacity = "0.85")
+            }
+            onMouseLeave={(e) =>
+              ((e.currentTarget as HTMLElement).style.opacity = "1")
+            }
+          >
+            Browse Techniques →
+          </Link>
         </motion.div>
 
         <motion.div
@@ -258,130 +340,6 @@ export default function LandingPage() {
                 <p style={{ fontSize: "14px", color: "#555", lineHeight: "1.7" }}>{cat.desc}</p>
               </motion.a>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── PRICING ── */}
-      <section id="pricing" style={{ padding: "100px 24px", borderTop: "1px solid #1a1a1a" }}>
-        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="font-serif"
-            style={{ fontSize: "11px", letterSpacing: "0.2em", color: "#ff4d00", marginBottom: "16px", textTransform: "uppercase" }}
-          >
-            Pricing
-          </motion.p>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="font-serif"
-            style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 700, marginBottom: "64px" }}
-          >
-            Simple. No bullshit.
-          </motion.h2>
-
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1px", background: "#1a1a1a" }}>
-            {/* FREE */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              style={{ background: "#0a0a0a", padding: "56px 40px" }}
-            >
-              <div className="font-serif" style={{ fontSize: "11px", letterSpacing: "0.2em", color: "#555", marginBottom: "20px" }}>
-                FREE
-              </div>
-              <div className="font-serif" style={{ fontSize: "52px", fontWeight: 700, marginBottom: "6px" }}>
-                €0
-              </div>
-              <div style={{ fontSize: "13px", color: "#444", marginBottom: "40px" }}>forever</div>
-              <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "12px", marginBottom: "48px" }}>
-                {["Biblioteca completa sin límites", "Todas las técnicas y parámetros", "Búsqueda y filtros avanzados", "Sin cuenta necesaria"].map((f) => (
-                  <li key={f} style={{ fontSize: "14px", color: "#666", display: "flex", gap: "10px" }}>
-                    <span style={{ color: "#ff4d00" }}>—</span>{f}
-                  </li>
-                ))}
-              </ul>
-              <Link
-                href="/library"
-                style={{
-                  fontFamily: "var(--font-sans), sans-serif",
-                  fontSize: "12px",
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  color: "#ffffff",
-                  border: "1px solid #333",
-                  padding: "12px 24px",
-                  textDecoration: "none",
-                  display: "inline-block",
-                  transition: "border-color 0.2s",
-                }}
-                onMouseEnter={(e) =>
-                  ((e.currentTarget as HTMLElement).style.borderColor = "#ff4d00")
-                }
-                onMouseLeave={(e) =>
-                  ((e.currentTarget as HTMLElement).style.borderColor = "#333")
-                }
-              >
-                Start Free →
-              </Link>
-            </motion.div>
-
-            {/* PRO */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              style={{ background: "#0d0d0d", padding: "56px 40px", borderLeft: "2px solid #ff4d00" }}
-            >
-              <div className="font-serif" style={{ fontSize: "11px", letterSpacing: "0.2em", color: "#ff4d00", marginBottom: "20px" }}>
-                PRO
-              </div>
-              <div className="font-serif" style={{ fontSize: "52px", fontWeight: 700, marginBottom: "6px" }}>
-                €14
-              </div>
-              <div style={{ fontSize: "13px", color: "#444", marginBottom: "40px" }}>per month</div>
-              <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "12px", marginBottom: "48px" }}>
-                {[
-                  "Todo lo del plan Free",
-                  "Asistente IA ilimitado",
-                  "Técnicas estilo DJ famoso",
-                  "Historial de conversaciones",
-                  "Favoritos y dashboard",
-                ].map((f) => (
-                  <li key={f} style={{ fontSize: "14px", color: "#999", display: "flex", gap: "10px" }}>
-                    <span style={{ color: "#ff4d00" }}>—</span>{f}
-                  </li>
-                ))}
-              </ul>
-              <Link
-                href="/login"
-                style={{
-                  fontFamily: "var(--font-sans), sans-serif",
-                  fontSize: "12px",
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  color: "#0a0a0a",
-                  background: "#ff4d00",
-                  padding: "12px 24px",
-                  textDecoration: "none",
-                  display: "inline-block",
-                  transition: "opacity 0.2s",
-                }}
-                onMouseEnter={(e) =>
-                  ((e.currentTarget as HTMLElement).style.opacity = "0.85")
-                }
-                onMouseLeave={(e) =>
-                  ((e.currentTarget as HTMLElement).style.opacity = "1")
-                }
-              >
-                Get Pro →
-              </Link>
-            </motion.div>
           </div>
         </div>
       </section>
