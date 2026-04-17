@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { techniques, Category } from "@/lib/techniques";
 
-const ALL_CATS: (Category | "ALL")[] = ["ALL", "DRUMS", "SOUND DESIGN", "ARRANGEMENT", "DJ STYLES", "MIXING", "PLUGINS"];
+const ALL_CATS: (Category | "ALL")[] = ["ALL", "DRUMS", "SOUND DESIGN", "ARRANGEMENT", "DJ STYLES", "MIXING", "PLUGINS", "FUNDAMENTALS"];
 
 const levelColor: Record<string, string> = {
   beginner: "#22c55e",
