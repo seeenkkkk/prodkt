@@ -186,11 +186,24 @@ export default function LandingPage() {
               lineHeight: 0.9,
               letterSpacing: "-0.02em",
               color: "#ffffff",
-              marginBottom: "40px",
+              marginBottom: "12px",
             }}
           >
             PRODKT
           </h1>
+
+          <p
+            style={{
+              fontFamily: "var(--font-sans), sans-serif",
+              fontSize: "11px",
+              letterSpacing: "0.2em",
+              color: "#333",
+              textTransform: "uppercase",
+              marginBottom: "36px",
+            }}
+          >
+            by senk
+          </p>
 
           <p
             style={{
@@ -341,6 +354,70 @@ export default function LandingPage() {
               </motion.a>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── SOCIAL ── */}
+      <section style={{ borderTop: "1px solid #1a1a1a", padding: "48px 24px" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: "24px" }}>
+          <p style={{ fontFamily: "var(--font-sans), sans-serif", fontSize: "10px", letterSpacing: "0.2em", color: "#333", textTransform: "uppercase" }}>
+            by senk
+          </p>
+          <div style={{ display: "flex", gap: "40px", alignItems: "center", flexWrap: "wrap", justifyContent: "center" }}>
+            {/* Instagram */}
+            <a
+              href="https://instagram.com/seeenkkkk"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ display: "flex", alignItems: "center", gap: "10px", textDecoration: "none", color: "#444", fontFamily: "var(--font-sans), sans-serif", fontSize: "12px", letterSpacing: "0.08em", textTransform: "uppercase", transition: "color 0.2s" }}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#ff4d00")}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#444")}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+              </svg>
+              seeenkkkk
+            </a>
+
+            <span style={{ color: "#1a1a1a", fontSize: "16px" }}>·</span>
+
+            {/* SoundCloud */}
+            <a
+              href="https://soundcloud.com/senk"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ display: "flex", alignItems: "center", gap: "10px", textDecoration: "none", color: "#444", fontFamily: "var(--font-sans), sans-serif", fontSize: "12px", letterSpacing: "0.08em", textTransform: "uppercase", transition: "color 0.2s" }}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#ff4d00")}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#444")}
+            >
+              <svg width="18" height="12" viewBox="0 0 40 20" fill="currentColor">
+                <path d="M0 14.5c0 1.9 1.5 3.5 3.4 3.5s3.4-1.6 3.4-3.5c0-.2 0-.4-.1-.6C7 14 7.2 14 7.5 14c1.4 0 2.5-1.1 2.5-2.5 0-.5-.1-1-.4-1.4.1-.3.2-.6.2-.9 0-1.7-1.4-3-3.1-3-.2 0-.5 0-.7.1C5.4 4.6 3.7 3 1.7 3 .8 3 0 3.8 0 4.7v9.8zm10.5.2V9.5c.5-.4 1.1-.5 1.8-.5 1.9 0 3.4 1.5 3.4 3.4 0 .5-.1 1-.3 1.4.2.4.3.8.3 1.3 0 1.4-1.1 2.5-2.5 2.5-.9 0-1.7-.5-2.2-1.2-.2.1-.3.1-.5.1v.2zm6 .5V8c.6-.6 1.4-1 2.3-1 1.9 0 3.4 1.5 3.4 3.4v4.8c-.5.6-1.3 1-2.2 1-.9 0-1.7-.4-2.2-1h-.3v-.5zm6-1V7c.6-.7 1.5-1.2 2.5-1.2 1.9 0 3.5 1.6 3.5 3.5v6c-.6.7-1.5 1.2-2.5 1.2-1.9 0-3.5-1.6-3.5-3.5v-.5zm7 1V6c.6-.8 1.5-1.3 2.6-1.3 1.9 0 3.4 1.5 3.4 3.4v7c-.6.8-1.5 1.3-2.6 1.3-1.9 0-3.4-1.5-3.4-3.4z"/>
+              </svg>
+              senk
+            </a>
+
+            <span style={{ color: "#1a1a1a", fontSize: "16px" }}>·</span>
+
+            {/* Spotify */}
+            <a
+              href="https://open.spotify.com/artist/senk"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ display: "flex", alignItems: "center", gap: "10px", textDecoration: "none", color: "#444", fontFamily: "var(--font-sans), sans-serif", fontSize: "12px", letterSpacing: "0.08em", textTransform: "uppercase", transition: "color 0.2s" }}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#ff4d00")}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#444")}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+              </svg>
+              senk
+            </a>
+          </div>
+          <p style={{ fontFamily: "var(--font-sans), sans-serif", fontSize: "10px", color: "#222", letterSpacing: "0.1em" }}>
+            © 2025 PRODKT
+          </p>
         </div>
       </section>
     </div>
